@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -11,6 +12,12 @@ app.get('/', (req, res) => {
     if (debug) {  // FEATURE FLAG
         console.log(msg)
     }
+});
+
+/** MOCK de un API de pizzeria  */
+app.get('/pizzas', (req, res) => {
+    const pizzas = JSON.parse(fs.readFileSync('./datos/pizzas.json'));
+    res.json(pizzas);
 });
 
 app.listen(port, () => {

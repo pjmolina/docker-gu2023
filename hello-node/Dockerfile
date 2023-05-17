@@ -3,7 +3,6 @@ FROM node:20-alpine
 LABEL Author=abc
 LABEL Version=1.2.3
 
-
 WORKDIR /app
 RUN adduser usernode -D
 
@@ -17,6 +16,8 @@ ENV PORT 80
 ENV DEBUG no
 
 EXPOSE 80
+
+VOLUME /app/datos
 
 USER usernode
 

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "margarita",
+    "price": 8,
+    "vegan": true
+  },
+  {
+    "name": "con piña",
+    "price": 13,
+    "vegan": true
+  },
+  {
+    "name": "serranito",
+    "price": 12,
+    "vegan": false
+  }
+]
