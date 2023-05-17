@@ -2,9 +2,15 @@ const express = require('express');
 const app = express();
 
 const port = process.env.PORT || 8080;
+const debug = process.env.DEBUG === 'yes' || false;
 
 app.get('/', (req, res) => {
-    res.send("Hola aqui estamos. Hora: " + new Date().toISOString());
+    const msg = "Hola aqui estamos. Hora: " + new Date().toISOString();
+    res.send(msg);
+
+    if (debug) {  // FEATURE FLAG
+        console.log(msg)
+    }
 });
 
 app.listen(port, () => {
