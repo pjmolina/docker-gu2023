@@ -1,3 +1,5 @@
+docker rm hello1 -f
+
 docker run \
    -d \
    --name hello1 \

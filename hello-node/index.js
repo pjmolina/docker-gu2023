@@ -14,6 +14,12 @@ app.get('/', (req, res) => {
     }
 });
 
+app.get('/ping', (req, res) => {
+    res.json({ message: 'pong' });
+});
+
+
+
 /** MOCK de un API de pizzeria  */
 app.get('/pizzas', (req, res) => {
     const pizzas = JSON.parse(fs.readFileSync('./datos/pizzas.json'));
@@ -23,3 +29,4 @@ app.get('/pizzas', (req, res) => {
 app.listen(port, () => {
     console.log('corriendo en el puerto ' + port);
 });
+

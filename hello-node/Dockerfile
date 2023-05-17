@@ -6,6 +6,9 @@ LABEL Version=1.2.3
 WORKDIR /app
 RUN adduser usernode -D
 
+RUN apk update && apk add curl
+
+
 COPY --chown=usernode package.json .
 
 RUN npm i
@@ -19,7 +22,11 @@ EXPOSE 80
 
 VOLUME /app/datos
 
+STOPSIGNAL SIGTERM
+
 USER usernode
+
+HEALTHCHECK --interval=30s --timeout=1s --start-period=5s --retries=3 CMD [ "curl", "http://localhost:80/ping" ]
 
 CMD [ "node", "index.js"]
 
