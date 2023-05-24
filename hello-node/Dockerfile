@@ -17,6 +17,7 @@ COPY --chown=usernode *.js .
 
 ENV PORT 80
 ENV DEBUG no
+# ENV PASSWORD abracadabra
 
 EXPOSE 80
 
@@ -26,7 +27,7 @@ STOPSIGNAL SIGTERM
 
 USER usernode
 
-HEALTHCHECK --interval=30s --timeout=1s --start-period=5s --retries=3 CMD [ "curl", "http://localhost:80/ping" ]
+HEALTHCHECK --interval=3s --timeout=1s --start-period=5s --retries=3 CMD [ "curl", "http://localhost:80/ping" ]
 
 CMD [ "node", "index.js"]
 

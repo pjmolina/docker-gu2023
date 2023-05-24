@@ -1,0 +1,43 @@
+version: '3.9'
+networks:
+  net-public:
+  net-services:
+  net-db:
+secrets:
+  clave:
+    file: ./docker-compose/secrets/clave
+
+services:
+  db:
+    image: mongo:latest
+    # ports:
+    #   - "27017"
+    networks:
+      - net-db
+  app:
+    # image: hello-node
+    build: .
+    environment:
+      - PORT=80
+      - DEBUG=yes
+      - DB_URL="mongo://u:p@db:27017/bd1"
+      - PASSWORD=abracadra1
+    # ports:  
+    #   - "80"
+    # links:
+    #   - "db:db"
+    networks:
+      - net-services
+    secrets:
+      - clave
+  lb:
+    image: nginx:1.23.4-alpine
+    # links:
+    #   - "app:app"
+    ports:  
+      - "82:80"
+    volumes:
+      - "./docker-compose/lb/nginx.conf:/etc/nginx/nginx.conf:ro"
+    networks:
+      - net-public
+      - net-services
